@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <link rel="shortcut icon" href="/ces/volt-layout/images/favicon-2.ico" />
+    <style type="text/css">
+        .ui-tree
+        {
+            background-color:#ffffff;
+            border-style: none !important
+        }
+        .ui-commandlink
+        {
+            color: #ffffff !important;
+        }
+        .ui-inputfield{
+            padding: 3px 4px !important;
+        }
+        .ui-panelgrid .ui-panelgrid-cell{
+            padding: 2px 10px !important;
+        }
+        .ui-datatable .ui-datatable-header{
+            padding: 2px 10px !important;
+        }
+        .ui-datatable table thead tr th{
+
+        }
+        .ui-datatable-tablewrapper{
+            margin: 6px !important;
+        }
+        .ui-button-text-only .ui-button-text{
+            padding: 7px 17px !important;
+        }
+        .ui-paginator .ui-paginator-rpp-options{
+            padding: 0px 4px !important;
+        }
+        .ui-selectonemenu-trigger .ui-icon-triangle-1-s{
+            margin-top: 5px !important;
+        }
+        .ui-datatable table tbody td{
+            padding: 0px 3px !important;
+        }
+        .ui-paginator .ui-paginator-pages{
+            padding: 0px 0px !important;
+        }
+        .ui-messages-info-icon{
+            width: 31px !important;
+            height: 15px !important;
+            margin: 2px !important;
+        }
+
+        .ui-messages-error-icon{
+            width: 31px !important;
+            height: 15px !important;
+            margin: 2px !important;
+        }
+        .ui-messages ul{
+            margin-left: 22px !important;
+            margin-top: 0px !important;
+            margin-bottom: 0px !important;
+        }
+        .ui-messages-info{
+            padding: 3px !important;
+        }
+        .ui-messages-error{
+            padding: 3px !important;
+        }
+        .ui-selectonemenu-panel .ui-selectonemenu-list-item{
+            padding: 5px 14px !important;
+        }
+        .ui-button-text-only .ui-button-text{
+            padding: 9px 24px !important;
+        }
+        .ui-dialog{
+            box-shadow: none !important;
+            background-color: #e0e0e0 !important;
+            color: #e0e0e0 !important;
+            border-radius: 0px;
+        }
+        .animated .ui-progressbar-value {
+            background-image: url("/soccer-app/app/javax.faces.resource/images/preloader.gif.xhtml");
+        }
+        /*Email add remove CSS*/
+        .white-button.ui-button.ui-state-default {
+            background-color: #ffffff;
+            color: #222222;
+            border-color: #d6d6d6;
+        }
+
+        .white-button.ui-button.ui-state-default:enabled:hover,
+        .white-button.ui-button.ui-state-default:focus {
+            background-color: #f2f2f2;
+            border-color: #ccc;
+            color: #373a3c;
+        }
+
+        .green-button.ui-button.ui-state-default {
+            background-color: #5cb85c;
+            border-color: #5cb85c;
+            color: #fff;
+        }
+
+        .green-button.ui-button.ui-state-default:enabled:hover,
+        .green-button.ui-button.ui-state-default:focus {
+            background-color: #4cae4c;
+            border-color: #5cb85c;
+        }
+
+        .red-button.ui-button.ui-state-default {
+            background-color: #d9534f;
+            border-color: #d9534f;
+            color: #fff;
+        }
+
+        .red-button.ui-button.ui-state-default:enabled:hover,
+        .red-button.ui-button.ui-state-default:focus {
+            background-color: #d43f3a;
+            border-color: #d9534f;
+        }
+    </style>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+    </f:facet>
+    <title>Contact Tracing (COVID-19)</title>
+    <h:outputScript name="js/layout.js" library="volt-layout" />
+    <ui:insert name="head" />
+</h:head>
+
+<h:body styleClass="BlueBody">
+
+    <ui:include src="topbar.xhtml" />
+
+    <div id="layout-portlets-cover">
+        <div id="layout-portlets-cover-indent">
+            <div id="layout-portlets-table">
+
+                <div id="layout-portlets-tablerow">
+                    <div class="Container100">
+                        <ui:insert name="content">
+                            Template
+                        </ui:insert>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h:outputStylesheet name="css/core-layout.css" library="volt-layout" />
+    <h:outputStylesheet name="css/animate.css" library="volt-layout" />
+    <h:outputStylesheet name="css/volt-font.css" library="volt-layout" />
+    <h:outputStylesheet name="css/font-awesome.css" library="volt-layout" />
+    <h:outputStylesheet name="css/volt-layout.css" library="volt-layout" />
+</h:body>
+</html>

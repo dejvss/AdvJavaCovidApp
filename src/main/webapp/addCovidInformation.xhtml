@@ -1,0 +1,238 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/fullpage_temp.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="covid_info_frm">
+            <!-- start company setup form section -->
+            <div class="Container100 ui-fluid">
+                <div class="Container100 Responsive100">
+                    <p:dataTable id="covid_tbl" value="#{covidManagedBean.covidInformationList}" var="covid"
+                                 scrollable="true" resizableColumns="true" lazy="true"
+                                 draggableColumns="true" liveResize="true"
+                                 draggableRows="true"
+                                 rows="15" paginator="true" paginatorPosition="bottom"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="15,30,40,50" emptyMessage="No record found" reflow="true">
+                        <f:facet name="header">
+                            Covid Informations
+                        </f:facet>
+                        <p:column headerText="ISO Code" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.isoCode}"/>
+                        </p:column>
+                        <p:column headerText="Continent" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.continent}"/>
+                        </p:column>
+                        <p:column headerText="Location" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.location}"/>
+                        </p:column>
+                        <p:column headerText="Date" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.date}"/>
+                        </p:column>
+                        <p:column headerText="Total Cases" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.totalCases}"/>
+                        </p:column>
+                        <p:column headerText="New Cases" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.newCases}"/>
+                        </p:column>
+                        <p:column headerText="New Cases Smoothed" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.newCasesSmoothed}"/>
+                        </p:column>
+                        <p:column headerText="Total Death" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.totalDeaths}"/>
+                        </p:column>
+                        <p:column headerText="New Death" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.newDeaths}"/>
+                        </p:column>
+
+                        <p:column headerText="Re-Production Rate" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.reproductionRate}"/>
+                        </p:column>
+                        <p:column headerText="Icu Patients" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.icuPatients}"/>
+                        </p:column>
+
+                        <p:column headerText="Weekly Icu Admission" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.weeklyIcuAdmissions}"/>
+                        </p:column>
+                        <p:column headerText="Weekly Hosp Admission" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.weeklyHospAdmissions}"/>
+                        </p:column>
+                        <p:column headerText="New Tests" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.newTests}"/>
+                        </p:column>
+                        <p:column headerText="Total Test" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.totalTests}"/>
+                        </p:column>
+                        <p:column headerText="Total Tests Per Thousand" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.totalTestsPerThousand}"/>
+                        </p:column>
+                        <p:column headerText="New Tests Per Thousand" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.newTestsPerThousand}"/>
+                        </p:column>
+                        <p:column headerText="Edit" style="width: 10%">
+                            <p:commandButton value="Edit"
+                                             actionListener="#{covidManagedBean.editCovidInfo(covid)}"
+                                             update="covid_info_frm,:covid_setup_frm" process="@form"/>
+                        </p:column>
+                        <p:column headerText="Delete" style="width: 10%">
+                            <p:commandButton value="Delete" actionListener="#{covidManagedBean.deleteCovidInformation(covid)}"
+                                             update="covid_info_frm,covid_tbl"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+        </h:form>
+        <h:form id="covid_setup_frm">
+            <div class="Card">
+                <div class="CardTopic">Covid Information</div>
+                <div class="Separator"></div>
+                <div class="Container33 Responsive100">
+                    <p:panelGrid id="country_add_pnl" columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8"
+                                 layout="grid"
+                                 styleClass="ui-panelgrid-blank"
+                                 style="border:0px none; background-color:transparent;">
+                        <p:outputLabel for="id" value="ID"/>
+                        <p:inputText id="id" value="#{covidManagedBean.covidInformation.id}" disabled="true"/>
+
+                        <p:outputLabel for="iso_code" value="ISO Code"/>
+                        <p:inputText id="iso_code" value="#{covidManagedBean.covidInformation.isoCode}" />
+
+                        <p:outputLabel for="continent" value="Continent"/>
+                        <p:inputText id="continent" value="#{covidManagedBean.covidInformation.continent}"/>
+
+                        <p:outputLabel for="location" value="location"/>
+                        <p:inputText id="location" value="#{covidManagedBean.covidInformation.location}"/>
+
+                        <p:outputLabel for="date" value="Date"/>
+                        <p:inputText id="date" value="#{covidManagedBean.covidInformation.date}"/>
+
+                        <p:outputLabel for="total_cases" value="Total Cases"/>
+                        <p:inputText id="total_cases" value="#{covidManagedBean.covidInformation.totalCases}"/>
+
+                        <p:outputLabel for="new_cases" value="New Cases"/>
+                        <p:inputText id="new_cases" value="#{covidManagedBean.covidInformation.newCases}"/>
+
+                        <p:outputLabel for="new_cases_smoothed" value="New Cases Smoothed"/>
+                        <p:inputText id="new_cases_smoothed" value="#{covidManagedBean.covidInformation.newCasesSmoothed}"/>
+
+                        <p:outputLabel for="total_deaths" value="Total Death"/>
+                        <p:inputText id="total_deaths" value="#{covidManagedBean.covidInformation.totalDeaths}"/>
+
+                        <p:outputLabel for="new_deaths" value="New Deaths"/>
+                        <p:inputText id="new_deaths" value="#{covidManagedBean.covidInformation.newDeaths}"/>
+
+                        <p:outputLabel for="new_deaths_smoothed" value="New Deaths Smoothed"/>
+                        <p:inputText id="new_deaths_smoothed" value="#{covidManagedBean.covidInformation.newDeathsSmoothed}"/>
+
+                        <p:outputLabel for="total_cases_per_million" value="Total Cases Per Million"/>
+                        <p:inputText id="total_cases_per_million" value="#{covidManagedBean.covidInformation.totalCasesPerMillion}"/>
+
+                    </p:panelGrid>
+                </div>
+                <div class="Container33 Responsive100">
+                    <p:panelGrid id="country_add_pnl2" columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8"
+                                 layout="grid"
+                                 styleClass="ui-panelgrid-blank"
+                                 style="border:0px none; background-color:transparent;">
+                        <p:outputLabel for="new_cases_per_million" value="New Cases Per Million"/>
+                        <p:inputText id="new_cases_per_million" value="#{covidManagedBean.covidInformation.newCasesPerMillion}"/>
+
+                        <p:outputLabel for="new_cases_smoothed_per_million" value="New Casess Smoothed Per Million"/>
+                        <p:inputText id="new_cases_smoothed_per_million" value="#{covidManagedBean.covidInformation.newCasesSmoothedPerMillion}"/>
+
+                        <p:outputLabel for="total_deaths_per_million" value="Total Deaths Per Million"/>
+                        <p:inputText id="total_deaths_per_million" value="#{covidManagedBean.covidInformation.totalDeathsPerMillion}"/>
+
+                        <p:outputLabel for="new_deaths_per_million" value="New Deths Per Million"/>
+                        <p:inputText id="new_deaths_per_million" value="#{covidManagedBean.covidInformation.newDeathsPerMillion}"/>
+
+                        <p:outputLabel for="new_deaths_smoothed_per_million" value="New Deaths Smooth Per Million"/>
+                        <p:inputText id="new_deaths_smoothed_per_million" value="#{covidManagedBean.covidInformation.newDeathsSmoothedPerMillion}"/>
+
+                        <p:outputLabel for="reproduction_rate" value="Re-Production Rate"/>
+                        <p:inputText id="reproduction_rate" value="#{covidManagedBean.covidInformation.reproductionRate}"/>
+
+                        <p:outputLabel for="icu_patients" value="ICU Patients"/>
+                        <p:inputText id="icu_patients" value="#{covidManagedBean.covidInformation.icuPatients}"/>
+
+                        <p:outputLabel for="icu_patients_per_million" value="ICU Patients Per Million"/>
+                        <p:inputText id="icu_patients_per_million" value="#{covidManagedBean.covidInformation.icuPatientsPerMillion}"/>
+
+                        <p:outputLabel for="hosp_patients" value="HOSP Patients"/>
+                        <p:inputText id="hosp_patients" value="#{covidManagedBean.covidInformation.hospPatients}"/>
+
+                        <p:outputLabel for="hosp_patients_per_million" value="HOSP Patients per Million"/>
+                        <p:inputText id="hosp_patients_per_million" value="#{covidManagedBean.covidInformation.hospPatientsPerMillion}"/>
+
+                        <p:outputLabel for="weekly_icu_admissions" value="Weekly ICU Admission"/>
+                        <p:inputText id="weekly_icu_admissions" value="#{covidManagedBean.covidInformation.weeklyIcuAdmissions}"/>
+
+                    </p:panelGrid>
+                </div>
+                <div class="Container33 Responsive100">
+                    <p:panelGrid id="country_add_pnl3" columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8"
+                                 layout="grid"
+                                 styleClass="ui-panelgrid-blank"
+                                 style="border:0px none; background-color:transparent;">
+                        <p:outputLabel for="weekly_icu_admissions_per_million" value="Weekly ICU Admission Per Million"/>
+                        <p:inputText id="weekly_icu_admissions_per_million" value="#{covidManagedBean.covidInformation.weeklyIcuAdmissionsPerMillion}"/>
+
+                        <p:outputLabel for="weekly_hosp_admissions" value="Weekly HOSP Admission"/>
+                        <p:inputText id="weekly_hosp_admissions" value="#{covidManagedBean.covidInformation.weeklyHospAdmissions}"/>
+
+                        <p:outputLabel for="weekly_hosp_admissions_per_million" value="Weekly HOSP Admission per Million"/>
+                        <p:inputText id="weekly_hosp_admissions_per_million" value="#{covidManagedBean.covidInformation.weeklyHospAdmissionsPerMillion}"/>
+
+                        <p:outputLabel for="new_tests" value="New Test"/>
+                        <p:inputText id="new_tests" value="#{covidManagedBean.covidInformation.newTests}"/>
+
+                        <p:outputLabel for="total_tests" value="Total Tests"/>
+                        <p:inputText id="total_tests" value="#{covidManagedBean.covidInformation.totalTests}"/>
+
+                        <p:outputLabel for="total_tests_per_thousand" value="Total Test Per Thousand"/>
+                        <p:inputText id="total_tests_per_thousand" value="#{covidManagedBean.covidInformation.totalTestsPerThousand}"/>
+
+                        <p:outputLabel for="new_tests_per_thousand" value="New Tests Per Thousand"/>
+                        <p:inputText id="new_tests_per_thousand" value="#{covidManagedBean.covidInformation.newTestsPerThousand}"/>
+
+                        <p:outputLabel for="new_tests_smoothed" value="New Tests Smoothed"/>
+                        <p:inputText id="new_tests_smoothed" value="#{covidManagedBean.covidInformation.newTestsSmoothed}"/>
+
+                        <p:outputLabel for="new_tests_smoothed_per_thousand" value="New Tests Smoothed Per Thousand"/>
+                        <p:inputText id="new_tests_smoothed_per_thousand" value="#{covidManagedBean.covidInformation.newTestsSmoothedPerThousand}"/>
+
+                        <p:outputLabel for="positive_rate" value="Positive Rate"/>
+                        <p:inputText id="positive_rate" value="#{covidManagedBean.covidInformation.positiveRate}"/>
+
+                        <p:outputLabel for="tests_per_case" value="Test Per Case"/>
+                        <p:inputText id="tests_per_case" value="#{covidManagedBean.covidInformation.testsPerCase}"/>
+
+                    </p:panelGrid>
+                </div>
+                <div class="Container100 Responsive100">
+                    <center>
+                        <p:messages id="covid_msg" closable="true"/>
+                        <p:commandButton value="Add Covid"
+                                         actionListener="#{covidManagedBean.addCovidInformation}"
+                                         onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()"
+                                         update="covid_setup_frm,covid_msg,:covid_info_frm:covid_tbl"
+                                         style="width: auto;" icon="fa fa-save "/>
+                        <p:commandButton value="Update Covid"
+                                         actionListener="#{covidManagedBean.updateCovidInformation}"
+                                         onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()"
+                                         update="covid_setup_frm,covid_msg,:covid_info_frm:covid_tbl"
+                                         style="width: auto;" icon="fa fa-save "/>
+                    </center>
+                </div>
+            </div>
+        </h:form>
+        <p:dialog widgetVar="statusDialog" modal="true" position="right bottom" draggable="false" closable="false"
+                  resizable="false" showHeader="false">
+            <p:graphicImage name="images/circle_loading.gif" library="volt-layout"/>
+        </p:dialog>
+    </ui:define>
+</ui:composition>

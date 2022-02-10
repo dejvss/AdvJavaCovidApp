@@ -1,0 +1,24 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+
+    <!-- TOPBAR START -->
+    <div id="layout-topbar">
+        <div id="layout-topbar-indent">
+            <a href="/worldcovid/dashboard-user.xhtml"><p:graphicImage name="images/company_logo.png" id="logo" library="volt-layout" /></a>
+            <span class="DispInlBlock Fright" style="margin:10px 10px 0px 0px;">
+                <p:clock pattern="HH:mm:ss E, dd MMM yyyy" mode="server" /><p:spacer></p:spacer>
+                <h:form styleClass="DispInline">
+                    <p:button icon="fa fa-home" href="/worldcovid/dashboard-user.xhtml" value="Home" /> <p:spacer width="5"/>
+                    <p:commandButton value="Log Out" ajax="false" actionListener="#{logoutManaggedBean.logout}" icon="fa fa-sign-out" />
+                </h:form>
+            </span>
+        </div>
+    </div>
+
+    <ul id="top-menu">
+    </ul>
+</ui:composition>

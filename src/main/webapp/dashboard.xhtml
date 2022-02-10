@@ -1,0 +1,114 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template-dash.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <!--        <div class="Container100 Responsive100 NoIndent">-->
+        <div class="Container100 ui-fluid">
+            <div class="CardTopic">
+                <h3>World (COVID-19)</h3>
+                <div class="Separator"></div>
+            </div>
+        </div>
+        <h:form id="country_frm">
+            <div class="Container100 ui-fluid">
+                <div class="Container100 Responsive100">
+                    <div class="CardTopic">
+                        <p:panelGrid columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8" layout="grid"
+                                     styleClass="ui-panelgrid-blank"
+                                     style="border:0px none; background-color:transparent;">
+                            <p:outputLabel for="country" value="Country"/>
+                            <p:selectOneMenu id="country" value="#{dashboardManagedBean.countryName}" filter="true"
+                                             filterMatchMode="true">
+                                <f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true"/>
+                                <f:selectItems value="#{dashboardManagedBean.countryList}" var="count"
+                                               itemLabel="#{count.countryName}" itemValue="#{count.countryName}"/>
+                                <p:ajax event="change" listener="#{dashboardManagedBean.onCountryChange}"
+                                        update="history_tbl"
+                                        onstart="PF('statusDialog').show()"
+                                        oncomplete="PF('statusDialog').hide()"/>
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+                    </div>
+                </div>
+            </div>
+            <div class="Separator"></div>
+
+            <div class="Container100 ui-fluid">
+                <div class="Container100 Responsive100">
+                    <p:dataTable id="history_tbl" value="#{dashboardManagedBean.covidInformations}"
+                                 var="covid" scrollable="true" resizableColumns="true" lazy="true"
+                                 draggableColumns="true" liveResize="true"
+                                 draggableRows="true"
+                                 rows="15" paginator="true" paginatorPosition="bottom"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="15,30,40,50" emptyMessage="No record found" reflow="true">
+                        <f:facet name="header">
+                            Covid-19 World Data
+                        </f:facet>
+                        <p:column headerText="ISO Code" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.isoCode}"/>
+                        </p:column>
+                        <p:column headerText="Continent" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.continent}"/>
+                        </p:column>
+                        <p:column headerText="Location" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.location}"/>
+                        </p:column>
+                        <p:column headerText="Date" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.date}"/>
+                        </p:column>
+                        <p:column headerText="Total Cases" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.totalCases}"/>
+                        </p:column>
+                        <p:column headerText="New Cases" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.newCases}"/>
+                        </p:column>
+                        <p:column headerText="New Cases Smoothed" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.newCasesSmoothed}"/>
+                        </p:column>
+                        <p:column headerText="Total Death" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.totalDeaths}"/>
+                        </p:column>
+                        <p:column headerText="New Death" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.newDeaths}"/>
+                        </p:column>
+
+                        <p:column headerText="Re-Production Rate" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.reproductionRate}"/>
+                        </p:column>
+                        <p:column headerText="Icu Patients" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.icuPatients}"/>
+                        </p:column>
+
+                        <p:column headerText="Weekly Icu Admission" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.weeklyIcuAdmissions}"/>
+                        </p:column>
+                        <p:column headerText="Weekly Hosp Admission" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.weeklyHospAdmissions}"/>
+                        </p:column>
+                        <p:column headerText="New Tests" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.newTests}"/>
+                        </p:column>
+                        <p:column headerText="Total Test" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.totalTests}"/>
+                        </p:column>
+                        <p:column headerText="Total Tests Per Thousand" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.totalTestsPerThousand}"/>
+                        </p:column>
+                        <p:column headerText="New Tests Per Thousand" style="width: 10%" sortable="true">
+                            <h:outputText value="#{covid.newTestsPerThousand}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+        </h:form>
+        <p:dialog widgetVar="statusDialog" modal="true" position="right bottom" draggable="false" closable="false"
+                  resizable="false" showHeader="false">
+            <p:graphicImage name="images/bird-circle_loading.gif" library="volt-layout"/>
+        </p:dialog>
+    </ui:define>
+</ui:composition>

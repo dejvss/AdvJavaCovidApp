@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/fullpage_temp.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="country_info_add_frm">
+            <!-- start company setup form section -->
+            <div class="Container100 ui-fluid">
+                <div class="Container100 Responsive100">
+                    <p:dataTable id="country_tbl" value="#{countryManagedBean.countryEntityList}" var="country"
+                                 scrollable="true" resizableColumns="true" lazy="true"
+                                 draggableColumns="true" liveResize="true"
+                                 draggableRows="true"
+                                 rows="15" paginator="true" paginatorPosition="bottom"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="15,30,40,50" emptyMessage="No record found" reflow="true">
+                        <f:facet name="header">
+                            Country List
+                        </f:facet>
+                        <p:column headerText="Country Code">
+                            <h:outputText value="#{country.countryIsoCode}"/>
+                        </p:column>
+                        <p:column headerText="Country Name">
+                            <h:outputText value="#{country.countryName}"/>
+                        </p:column>
+                        <p:column headerText="Edit" style="width: 10%">
+                            <p:commandButton value="Edit"
+                                             actionListener="#{countryManagedBean.editCountryInfo(country)}"
+                                             update="country_info_add_frm,:country_setup_frm" process="@form"/>
+                        </p:column>
+                        <p:column headerText="Delete" style="width: 10%">
+                            <p:commandButton value="Delete" actionListener="#{countryManagedBean.deleteCountryInfo(country)}"
+                                             update="country_info_add_frm,country_tbl"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+        </h:form>
+        <h:form id="country_setup_frm">
+            <div class="Card">
+                <div class="CardTopic">Country Information</div>
+                <div class="Separator"></div>
+                <div class="Container50 Responsive100">
+                    <p:panelGrid id="country_add_pnl" columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8"
+                                 layout="grid"
+                                 styleClass="ui-panelgrid-blank"
+                                 style="border:0px none; background-color:transparent;">
+                        <p:outputLabel for="country_code" value="Country Code"/>
+                        <p:inputText id="country_code" value="#{countryManagedBean.countryEntity.countryIsoCode}" readonly="#{countryManagedBean.readOnly}"
+                                     placeholder="Country ISO Code" required="true"
+                                     requiredMessage="Please give the value"/>
+
+                        <p:outputLabel for="country_name" value="Country Name"/>
+                        <p:inputText id="country_name" value="#{countryManagedBean.countryEntity.countryName}"
+                                     placeholder="Country ISO Code" required="true"
+                                     requiredMessage="Please give the value"/>
+                    </p:panelGrid>
+                </div>
+                <div class="Container100 Responsive100">
+                    <center>
+                        <p:messages id="covid_msg" closable="true"/>
+                        <p:commandButton value="Add Country"
+                                         actionListener="#{countryManagedBean.addCountryInformation}"
+                                         onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()"
+                                         update="country_setup_frm,covid_msg,:country_info_add_frm:country_tbl"
+                                         style="width: auto;" icon="fa fa-save "/>
+                        <p:commandButton value="Update Country"
+                                         actionListener="#{countryManagedBean.updateCountryInformation}"
+                                         onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()"
+                                         update="country_setup_frm,covid_msg,:country_info_add_frm:country_tbl"
+                                         style="width: auto;" icon="fa fa-save "/>
+                    </center>
+                </div>
+            </div>
+        </h:form>
+        <p:dialog widgetVar="statusDialog" modal="true" position="right bottom" draggable="false" closable="false"
+                  resizable="false" showHeader="false">
+            <p:graphicImage name="images/circle_loading.gif" library="volt-layout"/>
+        </p:dialog>
+    </ui:define>
+</ui:composition>
